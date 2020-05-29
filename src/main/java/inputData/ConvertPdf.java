@@ -1,5 +1,6 @@
 package inputData;
 
+import lombok.extern.log4j.Log4j;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.rendering.ImageType;
 import org.apache.pdfbox.rendering.PDFRenderer;
@@ -13,6 +14,7 @@ import java.util.List;
 /**
  * convert - конвертирует файл PDF в список изображений
  */
+@Log4j
 public class ConvertPdf implements Convert {
     /**
      * Метод конвертирует PDF в список изображений
@@ -31,6 +33,7 @@ public class ConvertPdf implements Convert {
                     page, 300, ImageType.RGB);
             images.add(bim);
         }
+        log.info(String.format("%s конвертирован", filename));
 
         document.close();
 

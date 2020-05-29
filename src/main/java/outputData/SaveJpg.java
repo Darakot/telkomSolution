@@ -1,5 +1,6 @@
 package outputData;
 
+import lombok.extern.log4j.Log4j;
 import org.apache.pdfbox.tools.imageio.ImageIOUtil;
 
 import java.awt.image.BufferedImage;
@@ -9,6 +10,7 @@ import java.nio.file.Path;
 /**
  * Сохраняет картинки в Jpg
  */
+@Log4j
 public class SaveJpg implements Save {
 
     public SaveJpg() { }
@@ -22,5 +24,6 @@ public class SaveJpg implements Save {
     @Override
     public void save(BufferedImage images, Path path, String nameJpg, int page) throws IOException {
         ImageIOUtil.writeImage(images, String.format(path + "\\" + nameJpg + "_%d.jpg",page), 300);
+        log.info(String.format("Файл сохранен с именем %s_%d в каталоге %s в формате jpg", nameJpg,page,path.toString()));
     }
 }
