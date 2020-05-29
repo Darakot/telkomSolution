@@ -31,7 +31,7 @@ public class TestConvertPdfToJpg {
     }
 
     @Test
-    public void testConvert() throws IOException {
+    public void testConvert() throws IOException, InterruptedException {
         String pathTestFile = "src\\test\\resources";
         File jpgFile1 = new File("src\\test\\resources\\testFile\\testFile_1.jpg");
         File jpgFile2 = new File("src\\test\\resources\\testFile\\testFile_2.jpg");

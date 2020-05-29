@@ -20,10 +20,12 @@ public class SaveJpg implements Save {
      * @param nameJpg - имя с которым будут сохраняться картинки
      * @param page - номер страницы(Конечно имя файла будет иметь вид Имя + номер страницы + формат файла)
      * @throws IOException
+     * @return - 1 если файл удалось записать 0 если нет
      */
     @Override
-    public void save(BufferedImage images, Path path, String nameJpg, int page) throws IOException {
-        ImageIOUtil.writeImage(images, String.format(path + "\\" + nameJpg + "_%d.jpg",page), 300);
+    public boolean save(BufferedImage images, Path path, String nameJpg, int page) throws IOException {
+        boolean result = ImageIOUtil.writeImage(images, String.format(path + "\\" + nameJpg + "_%d.jpg", page), 300);
         log.info(String.format("Файл сохранен с именем %s_%d в каталоге %s в формате jpg", nameJpg,page,path.toString()));
+        return result;
     }
 }

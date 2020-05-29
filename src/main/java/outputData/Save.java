@@ -16,5 +16,5 @@ public interface Save {
      * @param page - номер страницы(Конечно имя файла будет иметь вид Имя + номер страницы + формат файла)
      * @throws IOException
      */
-    void save(BufferedImage images, Path path, String nameJpg, int page) throws IOException;
+    boolean save(BufferedImage images, Path path, String nameJpg, int page) throws IOException;
 }

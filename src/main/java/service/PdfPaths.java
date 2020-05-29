@@ -1,15 +1,24 @@
 package service;
 
-import lombok.NoArgsConstructor;
-
 import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@NoArgsConstructor
+/**
+ * Класс для получения путей файлов
+ * Повторное сканирование избегается путем сравнение коллекций, но возможно надо было делать БД в памяти и писать
+ * файлики туда.
+ */
 public class PdfPaths implements PathFiles {
+    private List<Path> pathsFiles;
+
+    public PdfPaths() {
+        this.pathsFiles = new ArrayList<>();
+    }
 
     /**
      * Получаем список путей тольк PDF фалйлов
@@ -19,9 +28,14 @@ public class PdfPaths implements PathFiles {
      */
     @Override
     public List<Path> getPaths(String catalog) throws IOException {
-        return java.nio.file.Files.walk(Paths.get(catalog))
-                .filter(java.nio.file.Files::isRegularFile)
+        List<Path> paths = Files.walk(Paths.get(catalog))
+                .filter(Files::isRegularFile)
                 .filter(f -> f.getFileName().toString().contains(".pdf"))
                 .collect(Collectors.toList());
+        if (!pathsFiles.isEmpty()) {
+            paths.removeAll(pathsFiles);
+        }
+        pathsFiles.addAll(paths);
+        return paths;
     }
 }

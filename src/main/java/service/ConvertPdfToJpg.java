@@ -2,7 +2,6 @@ package service;
 
 import inputData.Convert;
 import inputData.ConvertPdf;
-import lombok.RequiredArgsConstructor;
 import outputData.Save;
 import outputData.SaveJpg;
 
@@ -37,18 +36,19 @@ public class ConvertPdfToJpg implements ConvertInputToOutput {
      */
     @Override
     public void convert() throws IOException {
-        List<Path> paths = pathFiles.getPaths(path);
+            List<Path> paths = pathFiles.getPaths(path);
 
-        for (Path path : paths) {
-            List<BufferedImage> pagesImages = getConvert(path);
-            Path homeDirectory = path.getParent();
-            String nameFile = path.getFileName().toString().replace(".pdf", "");
-            Path directoryImages = Files.createDirectories(Paths.get(homeDirectory + "\\" + nameFile));
-            for (int count= 0;count < pagesImages.size(); count++ ) {
-                getSave(pagesImages.get(count), directoryImages, nameFile, count+1);
+            paths.forEach(f -> System.out.println(f.getFileName().toString()));
+
+            for (Path path : paths) {
+                List<BufferedImage> pagesImages = getConvert(path);
+                Path homeDirectory = path.getParent();
+                String nameFile = path.getFileName().toString().replace(".pdf", "");
+                Path directoryImages = Files.createDirectories(Paths.get(homeDirectory + "\\" + nameFile));
+                for (int count = 0; count < pagesImages.size(); count++) {
+                    getSave(pagesImages.get(count), directoryImages, nameFile, count + 1);
+                }
             }
-        }
-
     }
 
     /**
