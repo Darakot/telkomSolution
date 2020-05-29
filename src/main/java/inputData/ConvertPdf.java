@@ -1,5 +1,6 @@
 package inputData;
 
+import lombok.NoArgsConstructor;
 import lombok.extern.log4j.Log4j;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.rendering.ImageType;
@@ -15,6 +16,7 @@ import java.util.List;
  * convert - конвертирует файл PDF в список изображений
  */
 @Log4j
+@NoArgsConstructor
 public class ConvertPdf implements Convert {
     /**
      * Метод конвертирует PDF в список изображений

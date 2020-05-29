@@ -2,6 +2,7 @@ package service;
 
 import inputData.Convert;
 import inputData.ConvertPdf;
+import lombok.RequiredArgsConstructor;
 import outputData.Save;
 import outputData.SaveJpg;
 
@@ -16,9 +17,9 @@ import java.util.List;
  * Класс конвертирует PDF в Jpg
  */
 public class ConvertPdfToJpg implements ConvertInputToOutput {
-    PathFiles pathFiles = new PdfPaths();
-    Convert convertPdf = new ConvertPdf();
-    Save saveJpg = new SaveJpg();
+    private PathFiles pathFiles = new PdfPaths();
+    private Convert convertPdf = new ConvertPdf();
+    private Save saveJpg = new SaveJpg();
     private String path;
 
     /**

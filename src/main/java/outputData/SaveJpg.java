@@ -1,5 +1,6 @@
 package outputData;
 
+import lombok.NoArgsConstructor;
 import lombok.extern.log4j.Log4j;
 import org.apache.pdfbox.tools.imageio.ImageIOUtil;
 
@@ -11,9 +12,8 @@ import java.nio.file.Path;
  * Сохраняет картинки в Jpg
  */
 @Log4j
+@NoArgsConstructor
 public class SaveJpg implements Save {
-
-    public SaveJpg() { }
     /**
      * @param images - список картинок
      * @param path - путь по которому будет создана папка, в которой будут храниться картинки

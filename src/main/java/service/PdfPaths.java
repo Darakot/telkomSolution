@@ -1,11 +1,14 @@
 package service;
 
+import lombok.NoArgsConstructor;
+
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@NoArgsConstructor
 public class PdfPaths implements PathFiles {
 
     /**
