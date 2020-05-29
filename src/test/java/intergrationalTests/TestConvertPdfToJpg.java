@@ -9,6 +9,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import service.ConvertInputToOutput;
 import service.ConvertPdfToJpg;
+import util.DeleteFile;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -20,13 +21,13 @@ import java.io.IOException;
  * путем конвертации.(файл создает в ресурсах, туда же сохраняются изображения)
  * testConvert - тестирует логику программы
  */
-public class Tests {
+public class TestConvertPdfToJpg {
 
     //Создаем PDF
     @BeforeClass
     public static void createdFile() throws FileNotFoundException, DocumentException {
-        TestFile pdf = new TestPdf();
-        pdf.createFile("src\\test\\resources\\testFile.pdf");
+        TestFile pdf = new TestPdf("src\\test\\resources\\testFile.pdf");
+        pdf.createFile();
     }
 
     @Test
@@ -37,7 +38,7 @@ public class Tests {
 
         ConvertInputToOutput convertPdfToJpg = new ConvertPdfToJpg(pathTestFile);
         convertPdfToJpg.convert();
-        //Проверяем созадлись ли нужные нам файлы с нужными именами и форматом
+        //Проверяем создались ли нужные нам файлы с нужными именами и форматом
         Assert.assertTrue(jpgFile1.exists());
         Assert.assertTrue(jpgFile2.exists());
 
@@ -46,10 +47,9 @@ public class Tests {
     //Удаляем все что создали и конвертировали
     @AfterClass
     public static void deleteFile(){
-        TestFile pdf = new TestPdf();
-        pdf.deleteFile("src\\test\\resources\\testFile.pdf");
-        pdf.deleteFile("src\\test\\resources\\testFile\\testFile_1.jpg");
-        pdf.deleteFile("src\\test\\resources\\testFile\\testFile_2.jpg");
-        pdf.deleteFile("src\\test\\resources\\testFile");
+        DeleteFile.deleteFile("src\\test\\resources\\testFile.pdf");
+        DeleteFile.deleteFile("src\\test\\resources\\testFile\\testFile_1.jpg");
+        DeleteFile.deleteFile("src\\test\\resources\\testFile\\testFile_2.jpg");
+        DeleteFile.deleteFile("src\\test\\resources\\testFile");
     }
 }

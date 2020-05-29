@@ -3,19 +3,24 @@ package intergrationalTests.file;
 import com.itextpdf.text.*;
 import com.itextpdf.text.pdf.PdfWriter;
 
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 
 /**
- * Класс для создание и удаление файла нужного формата
+ * Класс для создание файла нужного формата
  */
 public class TestPdf implements TestFile {
+    String filename;
+
+    public TestPdf(String filename) {
+        this.filename = filename;
+    }
+
     //Создание файла
     @Override
-    public void createFile(String nameFile) throws DocumentException, FileNotFoundException {
+    public void createFile() throws DocumentException, FileNotFoundException {
         Document document = new Document();
-        PdfWriter.getInstance(document, new FileOutputStream(nameFile));
+        PdfWriter.getInstance(document, new FileOutputStream(filename));
 
         document.open();
         Font font = FontFactory.getFont(FontFactory.COURIER, 16, BaseColor.BLACK);
@@ -25,11 +30,5 @@ public class TestPdf implements TestFile {
             document.newPage();
         }
         document.close();
-    }
-    //Удаление файла
-    @Override
-    public void deleteFile(String nameFile) {
-        File file = new File(nameFile);
-        file.delete();
     }
 }
